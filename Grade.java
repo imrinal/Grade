@@ -1,84 +1,66 @@
-import java.util.*;
+import java.util.Scanner;
+
 public class Grade {
-    //Main Class;
     public static void main(String[] args) {
-        try(Scanner s=new Scanner(System.in)){
-            //initializing the variables;
-            double eng,sst,sci,cmp,tmarks;
-            int avg=0;
-            String Grade="",name,rollno;
+        try (Scanner scanner = new Scanner(System.in)) {
+            double english, socialStudies, science, computer, totalMarks;
+            String grade = "", name, rollNo;
 
-            //Taking input from the user;
             System.out.print("Enter Your Name: ");
-            name=s.nextLine();
+            name = scanner.nextLine();
             System.out.print("Enter Your Roll No: ");
-            rollno=s.nextLine();
+            rollNo = scanner.nextLine();
             System.out.println();
 
-            //Entering the marks;
             System.out.println("______Marks Entry (Out of 100)______");
-            System.out.print("English:");
-            eng=s.nextDouble();
-            System.out.print("Social Studies:");
-            sst=s.nextDouble();
-            System.out.print("Science:");
-            sci=s.nextDouble();
-            System.out.print("Computer:");
-            cmp=s.nextDouble();
+            english = getValidMarks(scanner, "English");
+            socialStudies = getValidMarks(scanner, "Social Studies");
+            science = getValidMarks(scanner, "Science");
+            computer = getValidMarks(scanner, "Computer");
             System.out.println();
 
-            //Total Marks of all the four subjects;
-            tmarks=eng+sst+sci+cmp;
-            //Average Marks of the four subjects;
-            avg=(int)(tmarks/4);
+            totalMarks = english + socialStudies + science + computer;
+            int average = (int) (totalMarks / 4);
 
-            /* Grading according to the average marks obtained;
-            Marks           Grade
-            Above 90        A+ (Excellent)
-            81 to 90        A (Very Good)
-            71 to 80        B+ (Good)
-            61 to 70        B (Satisfactory)
-            51 to 60        C+ (Acceptable performance)
-            35 to 50        C (Minimum passing grade)
-            Below 35        F (Fail)
-            */
-            if(avg > 90)
-            {
-                Grade="A+";
-            }
-            else if(avg > 80 && avg <= 90)
-            {
-                Grade="A";
-            }
-            else if(avg > 70 && avg <= 80)
-            {
-                Grade="B+";
-            }
-            else if(avg > 60 && avg <= 70)
-            {
-                Grade="B";
-            }
-            else if(avg > 50 && avg <= 60)
-            {
-                Grade="C+";
-            }
-            else if(avg > 35 && avg <= 50)
-            {
-                Grade="C";
-            }
-            else{
-                Grade="F";
+            if (average > 90) {
+                grade = "A+";
+            } else if (average > 80) {
+                grade = "A";
+            } else if (average > 70) {
+                grade = "B+";
+            } else if (average > 60) {
+                grade = "B";
+            } else if (average > 50) {
+                grade = "C+";
+            } else if (average > 35) {
+                grade = "C";
+            } else {
+                grade = "F";
             }
 
-            //Displaying the desired Output;
             System.out.println("_______Report Card:_______");
-            System.out.println("Name: "+name);
-            System.out.println("Roll No: "+rollno);
+            System.out.println("Name: " + name);
+            System.out.println("Roll No: " + rollNo);
             System.out.println();
-            System.out.println("Total Marks: "+tmarks+"/400");
-            System.out.println("Average Marks: "+avg);
-            System.out.println("Grade: "+Grade);
+            System.out.println("Total Marks: " + totalMarks + "/400");
+            System.out.println("Average Marks: " + average);
+            System.out.println("Grade: " + grade);
         } catch (Exception e) {
-            System.out.println("An error occurred: " + e.getMessage());}
+            System.out.println("An error occurred: " + e.getMessage());
+        }
+    }
+
+    private static double getValidMarks(Scanner scanner, String subject) {
+        double marks;
+        while (true) {
+            System.out.print(subject + ": ");
+            marks = scanner.nextDouble();
+            if (marks >= 0 && marks <= 100) {
+                break;
+            } else {
+                System.out.println("Please enter valid marks (0-100).");
+            }
+        }
+        return marks;
     }
 }
