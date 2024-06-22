@@ -19,3 +19,6 @@ The Student Grade Calculator is a Java program designed to calculate total marks
 
 ## Technologies Used
 - Java
+
+##Output
+![Output](4.png)
